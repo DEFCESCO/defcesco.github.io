@@ -1,16 +1,18 @@
 h1 {
-	text-align: left;
-	margin-bottom: .5em;
+    text-align: left;
+    margin-bottom: .5em;
 }
 body {
-	font-family: Arial, sans-serif;
-	padding: 1em;
-	background-color: #E4E0DA;
+    font-family: Arial, sans-serif;
+    padding: 1em;
+    background-color: #E4E0DA;
   color: #000000;
 }
 
 .bridge {
-  width: 100%;
+  max-width: 800px; 
+  margin-left: 0; 
+  margin-right: auto;
   height: 220px;
   position: relative;
 }
@@ -23,18 +25,18 @@ body {
   padding: 0.3em;
   text-align: center;
   position: absolute;
-  bottom: 30px; /* Decreased bottom margin */
+  bottom: 30px; 
 }
 
 .pier.box:nth-child(1) {
   left: 0;
 }
 
-.pier.box:nth-child(3) {
+.pier.box:nth-child(5) {
   right: 0;
 }
 
-.pier.box:nth-child(5) {
+.pier.box:nth-child(3) {
   left: calc(50% - 75px);
 }
 
@@ -47,27 +49,27 @@ body {
 }
 
 a {
-	color: #071340;
-	text-decoration: none;
+    color: #071340;
+    text-decoration: none;
 }
 
 a:hover {
-	background-color: #0033A1;
-	color: #F6F6F6;
+    background-color: #0033A1;
+    color: #F6F6F6;
 }
 
 pre {
-	margin-top: 2em;
+    margin-top: 2em;
 }
 
 pre a {
-	color: #0033A1;
-	text-decoration: none;
+    color: #0033A1;
+    text-decoration: none;
 }
 
 pre a:hover {
-	background-color: #0033A1;
-	color: #F6F6F6;
+    background-color: #0033A1;
+    color: #F6F6F6;
 }
 
 .share-posts + .share-posts {
