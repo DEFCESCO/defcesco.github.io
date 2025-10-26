@@ -75,7 +75,7 @@ main#bridge-scene {
 
 .bridge-superstructure {
   position: absolute;
-  inset: clamp(210px, 32vh, 260px) 0 auto 0;
+  inset: clamp(170px, 27vh, 220px) 0 auto 0;
   height: clamp(230px, 32vh, 280px);
   z-index: 5;
 }
@@ -153,7 +153,7 @@ main#bridge-scene {
 
 #pillar-container {
   position: absolute;
-  top: clamp(320px, 43vh, 398px);
+  top: clamp(270px, 38vh, 350px);
   width: 100%;
   display: flex;
   justify-content: center;
@@ -407,7 +407,7 @@ main#bridge-scene {
 @media (max-width: 780px) {
   #pillar-container {
     flex-wrap: wrap;
-    top: clamp(340px, 46vh, 390px);
+    top: clamp(300px, 42vh, 360px);
   }
 
   .pillar {
@@ -439,7 +439,7 @@ main#bridge-scene {
   }
 
   .bridge-superstructure {
-    inset: clamp(180px, 30vh, 220px) 0 auto 0;
+    inset: clamp(150px, 26vh, 200px) 0 auto 0;
     height: clamp(210px, 32vh, 240px);
   }
 
@@ -465,7 +465,7 @@ main#bridge-scene {
     flex-direction: column;
     align-items: center;
     gap: 24px;
-    top: clamp(330px, 46vh, 360px);
+    top: clamp(300px, 44vh, 340px);
   }
 
   .pillar {
