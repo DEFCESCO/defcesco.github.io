@@ -1,87 +1,77 @@
-<![CDATA[<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="author" content="austin a. defrancesco">
-    <meta name="description" content="The personal website of Austin A. DeFrancesco">
-    <title>austin a. defrancesco</title>
-    <link rel="icon" type="image/jpeg" href="/assets/profile.jpg">
-    <link rel="apple-touch-icon" href="/assets/profile.jpg">
-    <meta name="msapplication-TileColor" content="#ffffff">
-    <link rel="stylesheet" href="/css/style.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Austin A. Defrancesco - Illustrated Bridge</title>
+    <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-    <main id="bridge-scene">
-        <header class="header-content">
+    <div id="bridge-scene">
+        
+        <div class="header-content">
             <h1>the personal website of austin a. defrancesco.</h1>
             <h2>bridging nerdy stuff to pursue pleasant elegance.</h2>
-        </header>
-
-        <div class="bridge-superstructure" aria-hidden="true">
-            <div class="bridge-arch-container">
-                <svg viewBox="0 0 100 50" preserveAspectRatio="none">
-                    <path d="M 0 50 Q 50 0 100 50 Z" fill="#494b55" stroke="#33343c" stroke-width="0.6" />
-                </svg>
-            </div>
-
-            <div class="suspension-cables">
-                <span style="--cable-index:0"></span>
-                <span style="--cable-index:1"></span>
-                <span style="--cable-index:2"></span>
-                <span style="--cable-index:3"></span>
-                <span style="--cable-index:4"></span>
-                <span style="--cable-index:5"></span>
-                <span style="--cable-index:6"></span>
-                <span style="--cable-index:7"></span>
-                <span style="--cable-index:8"></span>
-                <span style="--cable-index:9"></span>
-                <span style="--cable-index:10"></span>
-            </div>
-
-            <div id="road-deck">
-                <div class="lane-markings"></div>
-            </div>
+        </div>
+        
+        <div class="suspension-cables">
+            <div class="main-cable"></div>
+            <div class="vertical-cables"></div>
         </div>
 
-        <section id="pillar-container" aria-label="Site sections">
-            <article class="pillar">
+        <div id="water"></div>
+
+        <div id="road-deck"></div>
+
+        <div id="pillar-container">
+            <div class="pillar">
                 <h3>open source</h3>
-                <p><a href="https://github.com/defcesco">projects</a></p>
-            </article>
-            <article class="pillar">
+                <p><a href="https://github.com/defcesco" target="_blank" rel="noopener">projects</a></p>
+            </div>
+            <div class="pillar">
                 <h3>personal</h3>
                 <p><a href="about.html">about</a></p>
-                <p><a href="https://blog.defcesco.io">blog</a></p>
-            </article>
-            <article class="pillar">
+                <p><a href="https://blog.defcesco.io" target="_blank" rel="noopener">blog</a></p>
+            </div>
+            <div class="pillar">
                 <h3>professional</h3>
-                <p><a href="resume.pdf">resume</a></p>
+                <p><a href="resume.pdf" target="_blank">resume</a></p>
                 <p><a href="publications.html">publications & talks</a></p>
-            </article>
-        </section>
-
+            </div>
+        </div>
+        
         <div class="traffic car"></div>
         <div class="traffic car blue"></div>
-        <div class="traffic person" style="animation-delay:-8s"></div>
-
-        <div class="traffic boat powerboat"></div>
+        <div class="traffic person" style="animation-delay: -7s; background: #e74c3c;"></div>
+        
+        <div class="traffic boat"></div>
         <div class="traffic boat sailboat"></div>
-        <div class="traffic boat barge"></div>
+        <div class="traffic boat" style="bottom: 100px; animation-duration: 40s; animation-delay: -20s;"></div>
 
-        <div id="water" aria-hidden="true"></div>
-    </main>
+    </div>
 
-    <section class="container contact-wrapper" aria-labelledby="contact-heading">
-        <h2 id="contact-heading">contact</h2>
-        <pre class="contact-list">
-email    → <a href="mailto:austin[@]defcesco[.]io">austin[@]defcesco[.]io</a>
-github   → <a href="https://github.com/defcesco">defcesco</a>
-linkedin → <a href="https://www.linkedin.com/in/austin-defrancesco">/austin-defrancesco</a>
-mastodon → <a href="https://infosec.exchange/@defcesco">@defcesco</a>
-twitter  → <a href="https://twitter.com/defcesco">@defcesco</a>
-        </pre>
-    </section>
+    <script>
+        const verticalCableContainer = document.querySelector('.vertical-cables');
+        const numCables = 30;
+        const archHeight = 120; // From CSS
+
+        for (let i = 1; i < numCables; i++) {
+            const cable = document.createElement('span');
+            const position = i / numCables;
+            
+            // Parabolic curve for the top of the cable
+            const x = (position - 0.5) * 2; // Map to -1 to 1
+            const y_parabola = x * x; // y = x^2 parabola, 0 at center, 1 at edges
+            
+            const cableTop = y_parabola * archHeight;
+            const cableHeight = archHeight - cableTop;
+
+            cable.style.top = `${cableTop}px`;
+            cable.style.height = `${cableHeight}px`;
+            cable.style.left = `${position * 100}%`;
+
+            verticalCableContainer.appendChild(cable);
+        }
+    </script>
 </body>
 </html>
-]]>

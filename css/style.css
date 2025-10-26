@@ -1,509 +1,416 @@
-:root {
-  --sky: #6eb4e0;
-  --water: #0056a8;
-  --asphalt: #444444;
-  --arch-fill: #494b55;
-  --arch-stroke: #33343c;
-  --pillar-top: #e87500;
-  --pillar-submerged: #c16200;
-  --pillar-text: #ffffff;
-  --contact-bg: #fff6ed;
-  --contact-border: rgba(0, 0, 0, 0.12);
-  --link: #0033a1;
-  --link-hover-bg: #0033a1;
-  --link-hover-text: #f6f6f6;
-  --container-max: 880px;
-}
-
-*,
-*::before,
-*::after {
-  box-sizing: border-box;
-}
-
-html,
-body {
-  margin: 0;
-  padding: 0;
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-  color: #1a1a1a;
-  background: var(--sky);
-  overflow-x: hidden;
-}
-
-a {
-  color: var(--link);
-  text-decoration: none;
-  font-weight: 600;
-}
-
-a:hover,
-a:focus-visible {
-  background: var(--link-hover-bg);
-  color: var(--link-hover-text);
-  outline: none;
-  border-radius: 4px;
-}
-
-main#bridge-scene {
-  position: relative;
-  width: 100%;
-  min-height: 780px;
-  height: clamp(720px, 85vh, 900px);
-  overflow: hidden;
-}
-
-.header-content {
-  position: relative;
-  z-index: 10;
-  text-align: center;
-  padding: clamp(32px, 5vh, 56px) 16px 24px;
-  color: #222;
-}
-
-.header-content h1 {
-  margin: 0 0 6px;
-  font-size: clamp(2.4rem, 4vw, 3.1rem);
-}
-
-.header-content h2 {
-  margin: 0;
-  font-weight: 300;
-  font-size: clamp(1.15rem, 2.4vw, 1.45rem);
-  color: #333;
-}
-
-.bridge-superstructure {
-  position: absolute;
-  inset: clamp(170px, 27vh, 220px) 0 auto 0;
-  height: clamp(230px, 32vh, 280px);
-  z-index: 5;
-}
-
-.bridge-arch-container {
-  position: absolute;
-  top: 0;
-  left: 10%;
-  width: 80%;
-  height: clamp(120px, 17vh, 148px);
-  z-index: 3;
-}
-
-.bridge-arch-container svg {
-  width: 100%;
-  height: 100%;
-}
-
-.suspension-cables {
-  position: absolute;
-  bottom: clamp(64px, 8vh, 86px);
-  left: 12%;
-  width: 76%;
-  height: clamp(140px, 18vh, 170px);
-  display: flex;
-  justify-content: space-between;
-  pointer-events: none;
-  z-index: 4;
-}
-
-.suspension-cables span {
-  width: 2px;
-  height: 100%;
-  background: linear-gradient(180deg, rgba(255, 255, 255, 0.9) 0%, rgba(170, 180, 195, 0.9) 45%, rgba(72, 76, 88, 0.98) 100%);
-  box-shadow: 0 0 4px rgba(255, 255, 255, 0.25);
-  transform-origin: top;
-  opacity: 0.95;
-}
-
-.suspension-cables span:nth-child(odd) {
-  width: 3px;
-}
-
-.suspension-cables span {
-  transform: rotate(calc((var(--cable-index, 0) - 5) * 0.8deg));
-  height: calc(100% - abs(var(--cable-index, 0) - 5) * 4%);
-}
-
-#road-deck {
-  position: absolute;
-  top: clamp(132px, 19vh, 182px);
-  left: 6%;
-  width: 88%;
-  height: clamp(34px, 4.4vh, 44px);
-  background: linear-gradient(180deg, rgba(90, 94, 105, 0.98) 0%, rgba(51, 53, 59, 0.98) 65%, rgba(24, 25, 30, 0.98) 100%);
-  border-radius: 16px;
-  box-shadow: 0 6px 14px rgba(0, 0, 0, 0.22);
-  z-index: 6;
-  overflow: hidden;
-}
-
-.lane-markings {
-  position: absolute;
-  top: 50%;
-  left: 0;
-  width: 100%;
-  height: 4px;
-  transform: translateY(-50%);
-  background-image: repeating-linear-gradient(
-    to right,
-    rgba(255, 255, 255, 0.9) 0 18px,
-    rgba(255, 255, 255, 0) 18px 32px
-  );
-}
-
-#pillar-container {
-  position: absolute;
-  top: clamp(270px, 38vh, 350px);
-  width: 100%;
-  display: flex;
-  justify-content: center;
-  gap: clamp(36px, 4vw, 48px);
-  align-items: flex-start;
-  z-index: 4;
-  padding: 0 24px;
-}
-
-.pillar {
-  width: clamp(210px, 22vw, 260px);
-  min-height: 210px;
-  background-color: var(--pillar-top);
-  color: var(--pillar-text);
-  padding: 22px clamp(18px, 2vw, 26px);
-  border-radius: 12px;
-  position: relative;
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.22);
-}
-
-.pillar::after {
-  content: "";
-  position: absolute;
-  top: 100%;
-  left: 10%;
-  width: 80%;
-  height: clamp(180px, 22vh, 260px);
-  background: var(--pillar-submerged);
-  border-bottom-left-radius: 18px;
-  border-bottom-right-radius: 18px;
-  opacity: 0.9;
-}
-
-.pillar h3 {
-  margin: 0 0 12px;
-  font-size: clamp(1.35rem, 2.2vw, 1.55rem);
-  text-transform: lowercase;
-  letter-spacing: 0.02em;
-}
-
-.pillar p {
-  margin: 0 0 6px;
-  font-size: clamp(0.98rem, 1.7vw, 1.05rem);
-  font-weight: 300;
-}
-
-.pillar a {
-  color: #fff7ec;
-  font-weight: 600;
-  position: relative;
-}
-
-.pillar a::after {
-  content: "";
-  position: absolute;
-  left: 0;
-  bottom: -3px;
-  width: 100%;
-  height: 2px;
-  background: rgba(255, 255, 255, 0.6);
-  transform: scaleX(0);
-  transform-origin: left;
-  transition: transform 0.25s ease;
-}
-
-.pillar a:hover::after,
-.pillar a:focus-visible::after {
-  transform: scaleX(1);
-}
-
-#water {
-  position: absolute;
-  bottom: 0;
-  width: 100%;
-  height: clamp(340px, 38vh, 440px);
-  background: var(--water);
-  z-index: 2;
-  mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 20' preserveAspectRatio='none'%3E%3Cpath d='M 0 10 Q 25 20 50 10 T 100 10 V 20 H 0 Z' fill='white' /%3E%3C/svg%3E");
-  mask-size: 100px 20px;
-  mask-repeat: repeat-x;
-  mask-position: 0 0;
-  -webkit-mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 20' preserveAspectRatio='none'%3E%3Cpath d='M 0 10 Q 25 20 50 10 T 100 10 V 20 H 0 Z' fill='white' /%3E%3C/svg%3E");
-  -webkit-mask-size: 100px 20px;
-  -webkit-mask-repeat: repeat-x;
-  -webkit-mask-position: 0 0;
-}
-
-.traffic {
-  position: absolute;
-  animation-timing-function: linear;
-  animation-iteration-count: infinite;
-  z-index: 7;
-}
-
-.car {
-  top: calc(var(--road-top, clamp(132px, 19vh, 182px)) + clamp(3px, 0.6vh, 5px));
-  width: 28px;
-  height: 12px;
-  border-radius: 6px 6px 2px 2px;
-  background: linear-gradient(180deg, #c0392b 0%, #7b241c 100%);
-  animation-name: drive;
-  animation-duration: 16s;
-}
-
-.car.blue {
-  background: linear-gradient(180deg, #2980b9 0%, #1f618d 100%);
-  animation-duration: 20s;
-  animation-delay: -6s;
-}
-
-.person {
-  top: calc(var(--road-top, clamp(132px, 19vh, 182px)) - clamp(2px, 0.4vh, 3px));
-  width: 8px;
-  height: 14px;
-  border-radius: 4px 4px 2px 2px;
-  background: linear-gradient(180deg, #f39c12 0%, #b9770e 100%);
-  animation-name: walk;
-  animation-duration: 26s;
-  z-index: 8;
-}
-
-.boat {
-  bottom: clamp(120px, 15vh, 150px);
-  width: 64px;
-  height: 18px;
-  border-radius: 6px 6px 2px 2px;
-  background: #ecf0f1;
-  animation: sail 28s linear infinite, bobbing 3.2s ease-in-out infinite;
-  z-index: 3;
-}
-
-.boat.powerboat {
-  animation-delay: -8s;
-  background: linear-gradient(180deg, #fdfefe 0%, #c9ced3 100%);
-}
-
-.boat.sailboat {
-  width: 46px;
-  animation-duration: 36s;
-  animation-delay: -12s;
-  bottom: clamp(72px, 9vh, 92px);
-}
-
-.boat.sailboat::before {
-  content: "";
-  position: absolute;
-  left: 50%;
-  bottom: 100%;
-  width: 0;
-  height: 0;
-  border-style: solid;
-  border-width: 0 0 34px 22px;
-  border-color: transparent transparent rgba(255, 255, 255, 0.95) transparent;
-  transform: translateX(-45%);
-}
-
-.boat.barge {
-  width: 88px;
-  height: 22px;
-  background: linear-gradient(180deg, #bdc3c7 0%, #808b96 100%);
-  animation-duration: 40s;
-  animation-delay: -18s;
-  bottom: clamp(96px, 12vh, 120px);
-}
-
-@keyframes drive {
-  from {
-    left: -15%;
-  }
-  to {
-    left: 110%;
-  }
-}
-
-@keyframes walk {
-  from {
-    left: -12%;
-  }
-  to {
-    left: 108%;
-  }
-}
-
-@keyframes sail {
-  from {
-    left: -18%;
-  }
-  to {
-    left: 118%;
-  }
-}
-
-@keyframes bobbing {
-  0%,
-  100% {
-    transform: translateY(0);
-  }
-  50% {
-    transform: translateY(-4px);
-  }
-}
-
-.container {
-  max-width: var(--container-max);
-  margin: 0 auto;
-  padding: clamp(24px, 3vw, 40px);
-}
-
-.contact-wrapper {
-  position: relative;
-  z-index: 15;
-  margin-top: clamp(-20px, -3vh, -10px);
-  background: rgba(255, 255, 255, 0.94);
-  border-radius: 18px;
-  box-shadow: 0 18px 36px rgba(0, 0, 0, 0.18);
-}
-
-.contact-wrapper h2 {
-  margin: 0 0 18px;
-  font-size: clamp(1.4rem, 2.4vw, 1.65rem);
-  text-transform: lowercase;
-  letter-spacing: 0.03em;
-}
-
-.contact-list {
-  margin: 0;
-  font-family: "Courier New", Courier, monospace;
-  line-height: 1.7;
-  padding: 18px clamp(16px, 2vw, 22px);
-  border: 1px solid var(--contact-border);
-  border-radius: 14px;
-  background: var(--contact-bg);
-  overflow-x: auto;
-  font-size: clamp(0.95rem, 1.8vw, 1.05rem);
-}
-
-@media (max-width: 960px) {
-  #pillar-container {
-    gap: clamp(24px, 4vw, 32px);
-  }
-
-  .pillar {
-    width: clamp(200px, 26vw, 230px);
-  }
-
-  main#bridge-scene {
-    min-height: 720px;
-  }
-}
-
-@media (max-width: 780px) {
-  #pillar-container {
-    flex-wrap: wrap;
-    top: clamp(300px, 42vh, 360px);
-  }
-
-  .pillar {
-    width: clamp(220px, 48vw, 260px);
-  }
-
-  .pillar::after {
-    height: clamp(140px, 18vh, 200px);
-  }
-
-  .suspension-cables {
-    left: 14%;
-    width: 72%;
-  }
-
-  #road-deck {
-    left: 8%;
-    width: 84%;
-  }
-}
-
-@media (max-width: 620px) {
-  .header-content h1 {
-    font-size: clamp(2.1rem, 6vw, 2.5rem);
-  }
-
-  main#bridge-scene {
-    min-height: 640px;
-  }
-
-  .bridge-superstructure {
-    inset: clamp(150px, 26vh, 200px) 0 auto 0;
-    height: clamp(210px, 32vh, 240px);
-  }
-
-  .bridge-arch-container {
-    left: 12%;
-    width: 76%;
-    height: clamp(110px, 16vh, 130px);
-  }
-
-  .suspension-cables {
-    left: 16%;
-    width: 68%;
-    height: clamp(120px, 16vh, 150px);
-  }
-
-  #road-deck {
-    left: 12%;
-    width: 76%;
-    height: clamp(30px, 4vh, 36px);
-  }
-
-  #pillar-container {
-    flex-direction: column;
-    align-items: center;
-    gap: 24px;
-    top: clamp(300px, 44vh, 340px);
-  }
-
-  .pillar {
-    width: clamp(240px, 78vw, 320px);
-  }
-
-  .pillar::after {
-    height: clamp(120px, 18vh, 160px);
-  }
-
-  .contact-wrapper {
-    margin: clamp(32px, 6vw, 48px) auto;
-  }
-}
-
-@media (max-width: 480px) {
-  .header-content {
-    padding: clamp(24px, 6vh, 32px) 14px 22px;
-  }
-
-  .suspension-cables span {
-    width: 2px;
-  }
-
-  #road-deck {
-    border-radius: 12px;
-  }
-
-  .lane-markings {
-    height: 3px;
-    background-image: repeating-linear-gradient(
-      to right,
-      rgba(255, 255, 255, 0.9) 0 14px,
-      rgba(255, 255, 255, 0) 14px 26px
-    );
-  }
-
-  .traffic {
-    animation-duration: calc(var(--base-duration, 20s) * 1.15);
-  }
-}
+/* --- BASE & SCENE SETUP --- */
+        body {
+            margin: 0;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            background-color: #6EB4E0; /* Sky color */
+            overflow-x: hidden;
+        }
+
+        body.secondary-page {
+            background: #6EB4E0;
+            color: #1f1f1f;
+        }
+
+        body.secondary-page .container {
+            max-width: 880px;
+            margin: clamp(24px, 6vh, 56px) auto;
+            padding: clamp(24px, 4vw, 48px);
+            background: #ffffff;
+            border-radius: 18px;
+            box-shadow: 0 12px 28px rgba(0,0,0,0.12);
+        }
+
+        body.secondary-page .share-posts {
+            margin: clamp(24px, 4vh, 36px) 0;
+        }
+
+        body.secondary-page a {
+            color: #0a4a78;
+        }
+
+        body.secondary-page a:hover,
+        body.secondary-page a:focus-visible {
+            color: #06355a;
+            background: rgba(10, 74, 120, 0.08);
+        }
+
+        #bridge-scene {
+            position: relative;
+            width: 100%;
+            height: 900px; /* Fixed height for the scene */
+            background-color: #6EB4E0; /* Sky color */
+            overflow: hidden;
+        }
+
+        /* --- HEADER CONTENT (FIXED) --- */
+        .header-content {
+            padding-top: 50px;
+            text-align: center; /* This will now work */
+            color: #222;
+            position: relative;
+            z-index: 10;
+        }
+        .header-content h1 {
+            font-size: 2.5em;
+            margin-bottom: 5px;
+            color: #1A1A1A;
+        }
+        .header-content h2 {
+            font-size: 1.2em;
+            font-weight: 300;
+            margin-top: 0;
+            color: #333;
+        }
+
+        /* --- BRIDGE ARCH (IMPROVED) --- */
+        
+        /* --- ROAD DECK (Passes in front) --- */
+        #road-deck {
+            position: absolute;
+            top: 380px; /* Sits *above* the pillar start */
+            width: 100%;
+            height: 35px;
+            background-color: #444; /* Dark asphalt color */
+            z-index: 5; /* IN FRONT of pillars */
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+        }
+        
+        /* Lane Markings */
+        #road-deck::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 100%;
+            height: 4px;
+            background-image: repeating-linear-gradient(to right, 
+                #FFF 0px, #FFF 15px, transparent 15px, transparent 30px);
+        }
+
+        /* --- WATER LAYER (With SVG wave mask) --- */
+        #water {
+            position: absolute;
+            bottom: 0;
+            width: 100%;
+            height: 450px; 
+            background-color: #0056A8; 
+            z-index: 2; /* Sits behind everything */
+            
+            /* Clean SVG wave mask */
+            mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 20' preserveAspectRatio='none'%3E%3Cpath d='M 0 10 Q 25 20 50 10 T 100 10 V 20 H 0 Z' fill='white' /%3E%3C/svg%3E");
+            mask-size: 100px 20px;
+            mask-repeat: repeat-x;
+            mask-position: 0 0;
+            -webkit-mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 20' preserveAspectRatio='none'%3E%3Cpath d='M 0 10 Q 25 20 50 10 T 100 10 V 20 H 0 Z' fill='white' /%3E%3C/svg%3E");
+            -webkit-mask-size: 100px 20px;
+            -webkit-mask-repeat: repeat-x;
+            -webkit-mask-position: 0 0;
+        }
+
+        /* --- PILLARS/CONTENT CONTAINERS --- */
+        #pillar-container {
+            position: absolute;
+            top: 400px; /* STARTS BELOW THE ROAD */
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            z-index: 4; /* BEHIND the road */
+        }
+
+        .pillar {
+            background-color: #E87500; 
+            color: white;
+            padding: 20px;
+            border-radius: 8px;
+            width: 250px; 
+            min-height: 200px; 
+            margin: 0 30px; 
+            position: relative;
+            box-sizing: border-box; 
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+
+        /* The submerged part of the pillar */
+        .pillar::after {
+            content: '';
+            position: absolute;
+            top: 100%;
+            left: 10%; 
+            width: 80%;
+            height: 300px; 
+            background-color: #C16200; 
+        }
+        
+        /* Pillar Content Typography */
+        .pillar h3 {
+            margin: 0 0 10px 0;
+            font-size: 1.6em;
+            font-weight: 600;
+            text-transform: lowercase;
+        }
+        .pillar p {
+            margin: 0;
+            font-size: 0.95em;
+            font-weight: 300;
+        }
+
+        .pillar a {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            margin-top: 8px;
+            padding: 9px 14px;
+            background: rgba(255, 255, 255, 0.18);
+            color: #ffffff;
+            border-radius: 999px;
+            font-size: 1.02em;
+            font-weight: 600;
+            letter-spacing: 0.01em;
+            text-transform: lowercase;
+            transition: transform 0.2s ease, background 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        .pillar a::after {
+            content: '→';
+            font-size: 1em;
+            transition: transform 0.2s ease;
+        }
+
+        .pillar a:hover,
+        .pillar a:focus-visible {
+            background: rgba(255, 255, 255, 0.32);
+            box-shadow: 0 6px 14px rgba(0, 0, 0, 0.18);
+            transform: translateY(-2px);
+        }
+
+        .pillar a:hover::after,
+        .pillar a:focus-visible::after {
+            transform: translateX(2px);
+        }
+
+        /* --- ANIMATED TRAFFIC --- */
+        .traffic {
+            position: absolute;
+            animation-iteration-count: infinite;
+            animation-timing-function: linear;
+        }
+
+        /* Cars */
+        .car {
+            top: 375px; /* On the road */
+            width: 25px;
+            height: 10px;
+            background: #c0392b; /* Red car */
+            border-radius: 4px 4px 0 0;
+            z-index: 6; /* On top of road */
+            animation: drive 15s linear infinite;
+        }
+        .car.blue {
+            background: #2980b9;
+            animation-duration: 20s;
+            animation-delay: -5s;
+        }
+
+        @keyframes drive {
+            from { left: -5%; }
+            to { left: 105%; }
+        }
+
+        /* People (NEW) */
+        .person {
+            top: 368px; /* On the road */
+            width: 7px;
+            height: 12px;
+            background: #333;
+            border-radius: 4px 4px 0 0;
+            z-index: 6; /* On top of road */
+            animation: walk 25s linear infinite;
+        }
+
+        @keyframes walk {
+            from { left: -5%; }
+            to { left: 105%; }
+        }
+
+        /* Boats */
+        .boat {
+            bottom: 150px; /* On the water */
+            width: 60px;
+            height: 15px;
+            background: #ecf0f1;
+            border-radius: 5px 5px 0 0;
+            z-index: 3; /* Behind pillars, on water */
+            animation: sail 25s linear infinite, 
+                         bobbing 3s ease-in-out infinite;
+        }
+        .boat.sailboat {
+            width: 40px;
+            animation-duration: 35s;
+            animation-delay: -10s;
+            bottom: 50px;
+        }
+        .boat.sailboat::before {
+            content: '';
+            position: absolute;
+            left: 50%;
+            bottom: 100%;
+            width: 0;
+            height: 0;
+            border-style: solid;
+            border-width: 0 0 30px 20px;
+            border-color: transparent transparent #fff transparent;
+        }
+
+        @keyframes sail {
+            from { left: -10%; }
+            to { left: 110%; }
+        }
+
+        @keyframes bobbing {
+            0% { transform: translateY(0); }
+            50% { transform: translateY(-4px); }
+            100% { transform: translateY(0); }
+        }
+
+        /* --- SUSPENSION CABLES --- */
+        .suspension-cables {
+            position: absolute;
+            top: 260px; /* Align with arch top */
+            left: 10%;
+            width: 80%;
+            height: 120px; /* Match arch height */
+            z-index: 4; /* Between arch and road */
+        }
+
+        .main-cable {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            border: 3px solid rgba(50, 50, 50, 0.7);
+            border-bottom: none;
+            border-left: none;
+            border-right: none;
+            border-radius: 50% 50% 0 0 / 100% 100% 0 0;
+            box-sizing: border-box;
+        }
+
+        .vertical-cables {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+        }
+
+        .vertical-cables span {
+            position: absolute;
+            width: 2px;
+            background: linear-gradient(to bottom, rgba(50,50,50,0.8), rgba(50,50,50,0.2));
+        }
+
+        /* --- ABOUT PAGE STYLES --- */
+        .about-hero {
+            display: flex;
+            align-items: flex-start;
+            gap: 30px;
+            margin-bottom: 30px;
+        }
+
+        .profile-photo {
+            width: min(240px, 40vw);
+            aspect-ratio: 3 / 4;
+            border-radius: 16px;
+            object-fit: cover;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+        }
+
+        .about-intro p {
+            font-size: 1.1em;
+            line-height: 1.6;
+        }
+
+        .experience-list {
+            list-style: none;
+            padding: 0;
+            margin: 18px 0 0;
+        }
+
+        .experience-list li {
+            background: rgba(15, 61, 92, 0.08);
+            border-left: 4px solid #0f3d5c;
+            padding: 14px 18px;
+            border-radius: 12px;
+            margin-bottom: 16px;
+            line-height: 1.65;
+        }
+
+        .experience-list strong {
+            display: block;
+            font-size: 1.05em;
+            margin-bottom: 4px;
+            color: #0f3d5c;
+        }
+
+        .back-button {
+            display: inline-block;
+            margin: 20px 0 60px;
+            padding: 12px 25px;
+            background-color: #E87500;
+            color: white;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 600;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+
+        @media (max-width: 768px) {
+            .about-hero {
+                flex-direction: column;
+                align-items: center;
+                text-align: center;
+            }
+
+            .profile-photo {
+                width: clamp(200px, 60vw, 280px);
+            }
+        }
+
+        /* --- PUBLICATIONS & TALKS PAGE --- */
+        .publication-list,
+        .talk-list {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .publication-list li,
+        .talk-list li {
+            margin-bottom: 20px;
+            padding-left: 25px;
+            position: relative;
+            font-size: 1.05em;
+            line-height: 1.6;
+        }
+
+        .publication-list li::before,
+        .talk-list li::before {
+            content: '»';
+            position: absolute;
+            left: 0;
+            top: 0;
+            color: #E87500;
+            font-weight: bold;
+        }
+
+        .publication-list strong,
+        .talk-list strong {
+            display: block;
+            margin-bottom: 5px;
+            font-size: 1.1em;
+        }
+
+        @media (max-width: 600px) {
+            .publication-list li,
+            .talk-list li {
+                padding-left: 20px;
+            }
+        }
+
