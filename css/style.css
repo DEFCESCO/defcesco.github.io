@@ -5,6 +5,9 @@
   --orange-dark: #cc4e00;
   --accent: #0033a1;
   --cream: #fff6ed;
+  --steel-light: #8992a1;
+  --steel-mid: #606875;
+  --steel-dark: #2f323a;
 }
 
 *,
@@ -47,47 +50,151 @@ section.bridge {
   gap: 1.5rem;
 }
 
-.bridge-road {
-  height: 36px;
-  border-radius: 20px;
-  background: linear-gradient(180deg, #4c4c4c 0%, #2b2b2b 100%);
+.bridge-structure {
   position: relative;
-  box-shadow: 0 10px 18px rgba(0, 0, 0, 0.25);
+  height: 220px;
+  margin-bottom: 0.25rem;
 }
 
-.bridge-road::before,
-.bridge-road::after {
+.bridge-arch {
+  position: absolute;
+  top: 0;
+  left: 7%;
+  right: 7%;
+  height: 150px;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.arch-outline {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, var(--steel-light) 0%, var(--steel-mid) 55%, var(--steel-dark) 100%);
+  clip-path: ellipse(50% 100% at 50% 100%);
+  filter: drop-shadow(0 10px 16px rgba(31, 31, 31, 0.25));
+}
+
+.arch-outline::after {
   content: "";
   position: absolute;
+  inset: 6px;
+  clip-path: ellipse(48% 100% at 50% 100%);
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.55) 0%, rgba(136, 143, 158, 0.35) 55%, rgba(28, 30, 36, 0.6) 100%);
+  opacity: 0.75;
+}
+
+.bridge-cables {
+  position: absolute;
+  bottom: 44px;
+  left: 10%;
+  right: 10%;
+  height: 140px;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  pointer-events: none;
+  z-index: 3;
+}
+
+.bridge-cables span {
+  width: 2px;
+  height: 100%;
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.85) 0%, rgba(143, 151, 166, 0.85) 55%, rgba(48, 52, 61, 0.95) 100%);
+  box-shadow: 0 0 4px rgba(255, 255, 255, 0.25);
+  transform-origin: top;
+  opacity: 0.92;
+}
+
+.bridge-cables span:nth-child(1) {
+  height: 82%;
+  transform: rotate(-7deg);
+}
+
+.bridge-cables span:nth-child(2) {
+  height: 88%;
+  transform: rotate(-5deg);
+}
+
+.bridge-cables span:nth-child(3) {
+  height: 92%;
+  transform: rotate(-3deg);
+}
+
+.bridge-cables span:nth-child(4) {
+  height: 96%;
+  transform: rotate(-1deg);
+}
+
+.bridge-cables span:nth-child(5) {
+  transform: rotate(0deg);
+}
+
+.bridge-cables span:nth-child(6) {
+  height: 96%;
+  transform: rotate(1deg);
+}
+
+.bridge-cables span:nth-child(7) {
+  height: 92%;
+  transform: rotate(3deg);
+}
+
+.bridge-cables span:nth-child(8) {
+  height: 88%;
+  transform: rotate(5deg);
+}
+
+.bridge-cables span:nth-child(9) {
+  height: 82%;
+  transform: rotate(7deg);
+}
+
+.bridge-road {
+  position: absolute;
+  bottom: 0;
   left: 6%;
   right: 6%;
-  height: 4px;
-  border-radius: 4px;
-  background: rgba(255, 255, 255, 0.35);
+  height: 46px;
+  border-radius: 24px;
+  background: linear-gradient(180deg, #8c939f 0%, #5f6672 45%, #353840 100%);
+  box-shadow: 0 16px 24px rgba(18, 19, 24, 0.4);
+  z-index: 4;
+  overflow: hidden;
 }
 
 .bridge-road::before {
-  top: 8px;
+  content: "";
+  position: absolute;
+  inset: 6px 12px auto 12px;
+  height: 6px;
+  border-radius: 6px;
+  background: linear-gradient(90deg, rgba(255, 255, 255, 0.65) 0%, rgba(198, 205, 214, 0.35) 45%, rgba(86, 91, 101, 0.45) 100%);
+  opacity: 0.85;
 }
 
 .bridge-road::after {
-  bottom: 8px;
-  opacity: 0.6;
+  content: "";
+  position: absolute;
+  inset: auto 4px 4px 4px;
+  height: 8px;
+  border-radius: 6px;
+  background: linear-gradient(180deg, rgba(18, 19, 24, 0) 0%, rgba(18, 19, 24, 0.4) 75%, rgba(18, 19, 24, 0.55) 100%);
 }
 
 .road-line {
   position: absolute;
   top: 50%;
-  left: 6%;
-  right: 6%;
+  left: 14%;
+  right: 14%;
   height: 4px;
   border-radius: 4px;
-  background: repeating-linear-gradient(
+  background-image: repeating-linear-gradient(
     90deg,
-    rgba(255, 255, 255, 0.75) 0 16px,
-    rgba(255, 255, 255, 0) 16px 28px
+    rgba(255, 255, 255, 0.9) 0 18px,
+    rgba(255, 255, 255, 0) 18px 32px
   );
   transform: translateY(-50%);
+  filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.15));
 }
 
 .bridge-caption {
@@ -96,15 +203,18 @@ section.bridge {
   letter-spacing: 0.28em;
   font-size: 0.7rem;
   color: rgba(0, 0, 0, 0.55);
-  margin: 0;
+  margin: 0.25rem 0 0;
 }
 
 .bridge-pillars {
+  position: relative;
+  z-index: 5;
   display: flex;
   gap: 1.25rem;
   justify-content: space-between;
   align-items: stretch;
   flex-wrap: wrap;
+  margin-top: 1.6rem;
 }
 
 .pillar {
@@ -171,6 +281,8 @@ section.bridge {
   justify-content: center;
   gap: 0.85rem;
   padding-top: 0.6rem;
+  position: relative;
+  z-index: 0;
 }
 
 .wave {
@@ -294,15 +406,32 @@ pre {
     gap: 1.25rem;
   }
 
-  .bridge-road {
-    height: 32px;
+  .bridge-structure {
+    height: 200px;
   }
 
-  .bridge-road::before,
-  .bridge-road::after,
-  .road-line {
+  .bridge-arch {
     left: 10%;
     right: 10%;
+    height: 130px;
+  }
+
+  .bridge-cables {
+    left: 12%;
+    right: 12%;
+    height: 120px;
+    bottom: 40px;
+  }
+
+  .bridge-road {
+    left: 10%;
+    right: 10%;
+    height: 40px;
+  }
+
+  .road-line {
+    left: 18%;
+    right: 18%;
   }
 
   .bridge-caption {
@@ -311,6 +440,7 @@ pre {
 
   .bridge-pillars {
     gap: 1rem;
+    margin-top: 1.3rem;
   }
 
   .pillar {
@@ -335,18 +465,32 @@ pre {
     gap: 1.1rem;
   }
 
-  .bridge-road {
-    height: 28px;
+  .bridge-structure {
+    height: 180px;
   }
 
-  .bridge-road::before,
-  .bridge-road::after,
-  .road-line {
+  .bridge-arch {
     left: 12%;
     right: 12%;
+    height: 110px;
+  }
+
+  .bridge-cables {
+    left: 14%;
+    right: 14%;
+    height: 104px;
+    bottom: 34px;
+  }
+
+  .bridge-road {
+    left: 12%;
+    right: 12%;
+    height: 34px;
   }
 
   .road-line {
+    left: 20%;
+    right: 20%;
     height: 3px;
   }
 
@@ -357,6 +501,7 @@ pre {
 
   .bridge-pillars {
     flex-direction: column;
+    margin-top: 1rem;
   }
 
   .pillar {
