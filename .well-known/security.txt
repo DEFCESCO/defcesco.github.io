@@ -1,0 +1,7 @@
+Contact: mailto:austin@defcesco.io
+Contact: https://defcesco.io/about.html
+Expires: 2026-12-31T23:59:59.000Z
+Encryption: https://defcesco.io/.well-known/pgp-key.txt
+Preferred-Languages: en
+Canonical: https://defcesco.io/.well-known/security.txt
+Policy: https://defcesco.io/security-policy.html

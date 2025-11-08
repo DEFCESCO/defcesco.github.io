@@ -1,0 +1,26 @@
+{
+  "name": "Austin A. DeFrancesco - Cybersecurity",
+  "short_name": "Defcesco",
+  "description": "Personal website of Austin A. DeFrancesco, cybersecurity professional specializing in detection engineering and red team operations.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#6EB4E0",
+  "theme_color": "#E87500",
+  "orientation": "portrait-primary",
+  "categories": ["business", "education", "security"],
+  "lang": "en-US",
+  "icons": [
+    {
+      "src": "icon/android-chrome-192x192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "icon/android-chrome-512x512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ]
+}

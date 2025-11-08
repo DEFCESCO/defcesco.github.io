@@ -3,8 +3,27 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Austin A. DeFrancesco's personal website featuring cybersecurity expertise, open source projects, and professional background in detection engineering and red team operations.">
+    <meta property="og:title" content="Austin A. DeFrancesco - Cybersecurity">
+    <meta property="og:description" content="Personal website of Austin A. DeFrancesco, cybersecurity professional specializing in detection engineering and red team operations.">
+    <meta property="og:image" content="https://defcesco.io/assets/profile.jpg">
+    <meta property="og:url" content="https://defcesco.io">
+    <meta property="og:type" content="website">
+    <link rel="canonical" href="https://defcesco.io">
+    <link rel="manifest" href="site.webmanifest">
     <title>Austin A. DeFrancesco - Cybersecurity</title>
     <link rel="stylesheet" href="css/style.css">
+    <link rel="preload" href="https://fonts.googleapis.com/css?family=PT+Serif:400,700,400italic" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css?family=PT+Serif:400,700,400italic"></noscript>
+    <!-- Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=GA_MEASUREMENT_ID"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'GA_MEASUREMENT_ID');
+    </script>
+    <script defer src="js/script.js"></script>
 </head>
 <body>
     <div id="bridge-scene">
@@ -53,29 +72,5 @@
     <footer class="site-footer">
         <small>&copy; 2025 Austin A. DeFrancesco</small>
     </footer>
-
-    <script>
-        const verticalCableContainer = document.querySelector('.vertical-cables');
-        const numCables = 30;
-        const archHeight = 120; // From CSS
-
-        for (let i = 1; i < numCables; i++) {
-            const cable = document.createElement('span');
-            const position = i / numCables;
-            
-            // Parabolic curve for the top of the cable
-            const x = (position - 0.5) * 2; // Map to -1 to 1
-            const y_parabola = x * x; // y = x^2 parabola, 0 at center, 1 at edges
-            
-            const cableTop = y_parabola * archHeight;
-            const cableHeight = archHeight - cableTop;
-
-            cable.style.top = `${cableTop}px`;
-            cable.style.height = `${cableHeight}px`;
-            cable.style.left = `${position * 100}%`;
-
-            verticalCableContainer.appendChild(cable);
-        }
-    </script>
 </body>
 </html>
