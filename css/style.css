@@ -2,13 +2,14 @@
         body {
             margin: 0;
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-            background-color: #6EB4E0; /* Sky color */
+            background-color: var(--color-sky); /* Sky color */
             overflow-x: hidden;
         }
 
         body.secondary-page {
-            background: #6EB4E0;
-            color: #1f1f1f;
+            background: var(--color-sky);
+            color: var(--color-text);
+            font-family: var(--font-serif);
         }
 
         body.secondary-page .container {
@@ -17,7 +18,7 @@
             padding: clamp(24px, 4vw, 48px);
             background: #ffffff;
             border-radius: 18px;
-            box-shadow: 0 12px 28px rgba(0,0,0,0.12);
+            box-shadow: var(--shadow-card);
         }
 
         body.secondary-page .share-posts {
@@ -25,12 +26,12 @@
         }
 
         body.secondary-page a {
-            color: #0a4a78;
+            color: var(--color-link);
         }
 
         body.secondary-page a:hover,
         body.secondary-page a:focus-visible {
-            color: #06355a;
+            color: var(--color-link-visited);
             background: rgba(10, 74, 120, 0.08);
         }
 
@@ -38,7 +39,7 @@
             position: relative;
             width: 100%;
             height: 900px; /* Fixed height for the scene */
-            background-color: #6EB4E0; /* Sky color */
+            background-color: var(--color-sky); /* Sky color */
             overflow: hidden;
         }
 
@@ -119,7 +120,7 @@
         }
 
         .pillar {
-            background-color: #E87500; 
+            background-color: var(--color-orange);
             color: white;
             padding: 20px;
             border-radius: 8px;
@@ -320,7 +321,7 @@
             aspect-ratio: 3 / 4;
             border-radius: 16px;
             object-fit: cover;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+            box-shadow: var(--shadow-profile);
         }
 
         .about-intro p {
@@ -336,7 +337,7 @@
 
         .experience-list li {
             background: rgba(15, 61, 92, 0.08);
-            border-left: 4px solid #0f3d5c;
+            border-left: 4px solid var(--color-navy-darkest);
             padding: 14px 18px;
             border-radius: 12px;
             margin-bottom: 16px;
@@ -347,14 +348,14 @@
             display: block;
             font-size: 1.05em;
             margin-bottom: 4px;
-            color: #0f3d5c;
+            color: var(--color-navy-darkest);
         }
 
         .back-button {
             display: inline-block;
             margin: 20px 0 60px;
             padding: 12px 25px;
-            background-color: #E87500;
+            background-color: var(--color-orange);
             color: white;
             border-radius: 8px;
             text-decoration: none;
@@ -396,7 +397,7 @@
             position: absolute;
             left: 0;
             top: 0;
-            color: #E87500;
+            color: var(--color-orange);
             font-weight: bold;
         }
 
@@ -501,7 +502,7 @@
         }
 
         .breadcrumb a {
-            color: #0a4a78;
+            color: var(--color-link);
             text-decoration: none;
             padding: 0.25rem 0.5rem;
             border-radius: 4px;
@@ -511,7 +512,7 @@
         .breadcrumb a:hover,
         .breadcrumb a:focus {
             background-color: rgba(10, 74, 120, 0.1);
-            color: #06355a;
+            color: var(--color-link-visited);
         }
 
         .breadcrumb li[aria-current="page"] {
