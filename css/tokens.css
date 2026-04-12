@@ -1,0 +1,32 @@
+/*
+ * tokens.css — Design Token Contract
+ * defcesco.github.io
+ *
+ * This file declares all named CSS custom properties for the main site.
+ * The blog (blog.defcesco.io) mirrors these values in _sass/_variables.scss.
+ * Load this file BEFORE style.css in every HTML page.
+ *
+ * Scope (per D-02): colors, typography, border-radius, and shadows only.
+ * Scene-specific values (bridge animation colors, derived alphas) are NOT tokenized.
+ */
+
+:root {
+  /* --- Colors --- */
+  --color-sky:          #6eb4e0;   /* background, #bridge-scene */
+  --color-orange:       #e87500;   /* accent, pillars, back-button */
+  --color-navy-darkest: #0f3d5c;   /* experience-list border, strong text */
+  --color-link:         #0a4a78;   /* body.secondary-page a, breadcrumb a */
+  --color-link-visited: #06355a;   /* a:visited, a:hover on secondary */
+  --color-text:         #1f1f1f;   /* body text color */
+
+  /* --- Typography --- */
+  --font-serif: 'PT Serif', Georgia, serif;
+
+  /* --- Shape --- */
+  --radius-card: 18px;             /* body.secondary-page .container */
+
+  /* --- Shadows --- */
+  /* D-01: canonical value from blog _layout.scss — replaces main site's 0 12px 28px rgba(0,0,0,0.12) */
+  --shadow-card:    0 18px 36px rgba(15, 61, 92, 0.18);
+  --shadow-profile: 0 4px 12px rgba(0, 0, 0, 0.15);   /* .profile-photo */
+}
